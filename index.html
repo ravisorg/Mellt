@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Mellt : A brute force password checker that returns a meaningful number describing the real world strength of your password" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Mellt</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/ravisorg/Mellt">View on GitHub</a>
+
+          <h1 id="project_title">Mellt</h1>
+          <h2 id="project_tagline">A brute force password checker that returns a meaningful number describing the real world strength of your password</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/ravisorg/Mellt/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/ravisorg/Mellt/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h2>Description</h2>
+
+<p><a href="https://github.com/ravisorg/Mellt">Mellt</a> tests the strength of a password by calculating how long it would take to brute force it. Unlike most password strength checkers that just require one of each lowercase/uppercase/number/special char/at least 6 characters/etc, Mellt approaches the problem the same way a password cracker would, and returns a meaningful number you can use in determining the strength of a password. </p>
+
+<h2>Credits</h2>
+
+<p>Much of the logic / concept behind Mellt is based on the description of the <a href="http://www.hammerofgod.com/passwordcheck.aspx">TGP Password Strength Checker</a> by Timothy "Thor" Mullen.</p>
+
+<p>The included common-passwords.txt contains the 10,000 most common passwords from <a href="http://xato.net/passwords/more-top-worst-passwords/">Mark Burnett's excellent password collection</a>.</p>
+
+<h2>Usage</h2>
+
+<pre><code>include('Mellt.class.php');
+$mellt = new Mellt();
+$daysToCrack = $mellt-&gt;CheckPassword('my password');
+</code></pre>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Mellt maintained by <a href="https://github.com/ravisorg">ravisorg</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
