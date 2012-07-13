@@ -7,8 +7,7 @@
  * brute force it.
  *
  * @version 0.1.0
- * @link https://github.com/ravisorg/passwordcheck The homepage for this 
- * script.
+ * @link http://mel.lt/ The homepage for this script.
  * @link http://www.hammerofgod.com/passwordcheck.aspx Much of this is based 
  * on the description of Thor's Godly Privacy password strength checker, 
  * however the actual code below is all my own.
