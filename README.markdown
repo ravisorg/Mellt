@@ -11,9 +11,21 @@ The included common-passwords.txt contains the 10,000 most common passwords from
 
 ##Usage
 
+###PHP
+
 	include('Mellt.class.php');
 	$mellt = new Mellt();
 	$daysToCrack = $mellt->CheckPassword('my password');
+	
+###Javascript
+	
+	<script src="Mellt.js"></script>
+	<!-- Make sure common-passwords.js is included AFTER Mellt.js -->
+	<script src="common-passwords.js"></script>
+	<script>
+	var mellt = new Mellt();
+	var daysToCrack = mellt.CheckPassword('my password');
+	</script>
 	
 ##License
 
