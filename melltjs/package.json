@@ -9,9 +9,6 @@
         "thor",
         "brute force"
     ],
-    "dependencies": {
-        "lazy":"1.0.7"
-    },
     "license": "Modified BSD",
     "main": "./lib/meltjs"
 }
