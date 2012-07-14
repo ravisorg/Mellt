@@ -1,5 +1,4 @@
-var lazy = require("lazy"),
-	fs = require("fs");
+var fs = require("fs");
 /**
  * Check a password
  */
@@ -7,11 +6,8 @@ var lazy = require("lazy"),
 exports.checkPassword = function(password) {
 	//make sure it is lower case, this function can be called by itself
 	password = password.toLowerCase();
-	if (checkCommon(password)) {
-		return -1;
-	}
-	days = bruteForceDays(password);
-	return days;
+	var common = checkCommon(password)
+	return common === true ? -1 : bruteForceDays(password);
 }
 
 /**
@@ -21,14 +17,9 @@ exports.checkPassword = function(password) {
  */
 
 function checkCommon(password) {
-	new lazy(fs.createReadStream(__dirname + '/common-passwords.txt', {
-		flags: 'r'
-	})).lines.forEach(function(line) {
-		if (line === password) {
-			return true;
-		}
-	});
-	return false;
+	var found = false;
+	var data = fs.readFileSync(__dirname + '/common-passwords.txt', 'UTF-8').toString();
+	return data.split("\r\n").indexOf(password) !== -1;
 }
 
 /**
