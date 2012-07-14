@@ -208,7 +208,7 @@ class Mellt {
 			return 1000000000;
 		}
 
-		return (int) $days;
+		return round($days);
 
 	}
 
