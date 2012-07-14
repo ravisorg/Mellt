@@ -109,7 +109,7 @@ function bruteForceDays(password) {
 	if (days > 1000000000) {
 		return 1000000000;
 	}
-	return parseInt(days);
+	return Math.round(days);
 }
 
 /**
