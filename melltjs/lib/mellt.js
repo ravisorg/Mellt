@@ -1,10 +1,11 @@
 /**
  * Check a password
- */ 
+ */
+
 exports.checkPassword = function(password) {
 	//make sure it is lower case, this function can be called by itself
 	password = password.toLowerCase();
-	if (this.checkCommon(password)) {
+	if (checkCommon(password)) {
 		return -1;
 	}
 	days = bruteForceDays(password);
@@ -16,9 +17,8 @@ exports.checkPassword = function(password) {
  * We do this because "password" takes 129 seconds, but is the first
  * thing an attacker will try.
  */
-exports.checkCommon = function(password) {
-	//make sure it is lower case, this function can be called by itself
-	password = password.toLowerCase();
+
+function checkCommon(password) {
 	var commonPasswords = require('./common-passwords.json');
 	var text = password.toLowerCase();
 	for (var t = 0; t < commonPasswords.length; t++) {
@@ -34,7 +34,8 @@ exports.checkCommon = function(password) {
 /**
  * Figure out how long it will take to brute force a password
  */
-bruteForceDays = function(password) {
+
+function bruteForceDays(password) {
 	//make sure it is lower case, this function can be called by itself
 	password = password.toLowerCase();
 	base = getCharset(password);
@@ -117,8 +118,9 @@ bruteForceDays = function(password) {
 
 /**
  * Figure out which character set the password is using (based on the most  "complex" character in it).
- */ 
-getCharset = function(password) {
+ */
+
+function getCharset(password) {
 	var characterSets = require('./charsets.json');
 	// Figure out which character set the password is using (based on the most 
 	// "complex" character in it).
