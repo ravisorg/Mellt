@@ -26,7 +26,13 @@ The included common-passwords.txt contains the 10,000 most common passwords from
 	var mellt = new Mellt();
 	var daysToCrack = mellt.CheckPassword('my password');
 	</script>
-	
+
+###nodejs
+    var mellt = require("./lib/mellt");
+
+    var daysToCrack = mellt.checkPassword('my password');
+
+
 ##License
 
 Mellt is licensed under the Modified BSD License (aka the 3 Clause BSD). Basically you can use it for any purpose, including commercial, so long as you leave the copyright notice intact and don't use my name or the names of any other contributors to promote products derived from Mellt.
