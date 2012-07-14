@@ -22,7 +22,7 @@ function checkCommon(password) {
 	var commonPasswords = require('./common-passwords.json');
 	var text = password.toLowerCase();
 	for (var t = 0; t < commonPasswords.length; t++) {
-		if (commonPasswords[t] == text) {
+		if (commonPasswords[t] === text) {
 			// If their password exists in the common file, then it's 
 			// zero time to crack this terrible password.
 			return true;
@@ -75,7 +75,7 @@ function bruteForceDays(password) {
 		var charactersAtPosition = base.indexOf(password[position]) + 1;
 		// If we're at the last character, simply add it's position in the character set
 		// this would be the "9" in the pin code example above.
-		if (powerOf == 0) {
+		if (powerOf === 0) {
 			attempts = attempts + charactersAtPosition;
 		}
 		// Otherwise we need to iterate through all the other characters positions to 
