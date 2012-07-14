@@ -1,3 +1,5 @@
+var lazy = require("lazy"),
+	fs = require("fs");
 /**
  * Check a password
  */
@@ -19,15 +21,13 @@ exports.checkPassword = function(password) {
  */
 
 function checkCommon(password) {
-	var commonPasswords = require('./common-passwords.json');
-	var text = password.toLowerCase();
-	for (var t = 0; t < commonPasswords.length; t++) {
-		if (commonPasswords[t] === text) {
-			// If their password exists in the common file, then it's 
-			// zero time to crack this terrible password.
+	new lazy(fs.createReadStream(__dirname + '/common-passwords.txt', {
+		flags: 'r'
+	})).lines.forEach(function(line) {
+		if (line === password) {
 			return true;
 		}
-	}
+	});
 	return false;
 }
 
@@ -121,7 +121,7 @@ function bruteForceDays(password) {
  */
 
 function getCharset(password) {
-	var characterSets = require('./charsets.json');
+	var characterSets = ["0123456789", "abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"]
 	// Figure out which character set the password is using (based on the most 
 	// "complex" character in it).
 	var base = false;
