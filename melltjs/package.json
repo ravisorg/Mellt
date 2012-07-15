@@ -1,0 +1,14 @@
+{
+    "name": "melltjs",
+    "version": "1.0.0",
+    "description": "Test the strength of a password by calculating how long it would take to brute force it",
+    "keywords": [
+        "password",
+        "password check",
+        "mellt",
+        "thor",
+        "brute force"
+    ],
+    "license": "Modified BSD",
+    "main": "./lib/meltjs"
+}

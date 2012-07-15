@@ -204,7 +204,7 @@ Mellt.prototype = {
 			return 1000000000;
 		}
 
-		return Math.round(days);
+		return parseInt(days);
 
 	}
 
