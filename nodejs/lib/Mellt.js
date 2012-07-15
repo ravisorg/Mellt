@@ -3,11 +3,11 @@ var fs = require("fs");
  * Check a password
  */
 
-exports.checkPassword = function(password) {
+exports.CheckPassword = function(password) {
 	//make sure it is lower case, this function can be called by itself
 	password = password.toLowerCase();
-	var common = checkCommon(password)
-	return common === true ? -1 : bruteForceDays(password);
+	var common = CheckCommon(password)
+	return common === true ? -1 : BruteForce(password);
 }
 
 /**
@@ -16,7 +16,7 @@ exports.checkPassword = function(password) {
  * thing an attacker will try.
  */
 
-function checkCommon(password) {
+function CheckCommon(password) {
 	var found = false;
 	var data = fs.readFileSync(__dirname + '/common-passwords.txt', 'UTF-8').toString();
 	return data.split("\r\n").indexOf(password) !== -1;
@@ -26,10 +26,10 @@ function checkCommon(password) {
  * Figure out how long it will take to brute force a password
  */
 
-function bruteForceDays(password) {
+function BruteForce(password) {
 	//make sure it is lower case, this function can be called by itself
 	password = password.toLowerCase();
-	base = getCharset(password);
+	base = GetCharset(password);
 	var hashesPerSecond = 1000000000;
 	// Starting at the first character, figure out it's position in the character set
 	// and how many attempts will take to get there. For example, say your password
@@ -111,7 +111,7 @@ function bruteForceDays(password) {
  * Figure out which character set the password is using (based on the most  "complex" character in it).
  */
 
-function getCharset(password) {
+function GetCharset(password) {
 	var characterSets = ["0123456789", "abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"]
 	// Figure out which character set the password is using (based on the most 
 	// "complex" character in it).

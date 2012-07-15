@@ -9,6 +9,10 @@ Much of the logic / concept behind Mellt is based on the description of the [TGP
 
 The included common-passwords.txt contains the 10,000 most common passwords from [Mark Burnett's excellent password collection](http://xato.net/passwords/more-top-worst-passwords/).
 
+The PHP and Javascript implementations were developed by [ravisorg](https://github.com/ravisorg).
+
+The Node.js implementation was developed by [SeanJA](https://github.com/SeanJA).
+
 ##Usage
 
 ###PHP
@@ -28,16 +32,16 @@ The included common-passwords.txt contains the 10,000 most common passwords from
 	</script>
 
 ###nodejs
-    var mellt = require("./lib/mellt");
 
-    var daysToCrack = mellt.checkPassword('my password');
+	var mellt = require("./lib/Mellt");
+	var daysToCrack = mellt.CheckPassword('my password');
 
 
 ##License
 
 Mellt is licensed under the Modified BSD License (aka the 3 Clause BSD). Basically you can use it for any purpose, including commercial, so long as you leave the copyright notice intact and don't use my name or the names of any other contributors to promote products derived from Mellt.
 
-	Copyright (c) 2012, Travis Richardson
+	Copyright (c) 2012, ravisorg
 	All rights reserved.
 	
 	Redistribution and use in source and binary forms, with or without
