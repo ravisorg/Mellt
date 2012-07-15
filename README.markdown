@@ -36,6 +36,23 @@ The Node.js implementation was developed by [SeanJA](https://github.com/SeanJA).
 	var mellt = require("./lib/Mellt");
 	var daysToCrack = mellt.CheckPassword('my password');
 
+##Security Q&A
+
+####Q: Those wacky crackers can see Mellt's code! They'll just use that to simplify their brute force attacks (eg: reversing the character sets)!
+
+A: The benefit to the attacker of seeing the source to Mellt is negligible. No user is going to think to them self "I can save one character if I use z's instead of a's". Their favorite password will be banned because it's too weak and they'll pick something stronger (vs just adding a $ to the end) - that's the purpose of these scripts.
+
+####Q: You include the top 10,000 common passwords, won't people (and crackers) just use the 10,001st most common?
+
+A: No, people don't work that way - they don't move down the list trying each one in turn. The purpose of banning the most common passwords is to prevent people from being lazy and using "password". Once you prevent that, you force them to be a little more creative and come up with something better.
+
+####Q: "[pass123$](http://pastebin.com/b79cJV5f)" isn't on the common list, but it's a terrible password! You should ban it!
+
+A: No, if it's not on the list of 10,000 most common, it's probably not that common. And the attacker doesn't know that it's a bad password when s/he starts trying to break it, so they need to try all the combinations to get there. "pass123$" is not a good password, but it's not "[12345](http://www.youtube.com/watch?v=K95SXe3pZoY)" bad.
+
+####Q: Why do I need this tool? I'm hashing my passwords / preventing multiple attempts per second / etc...
+
+A: Mellt is assuming the attacker has your database of passwords. Of course you need to be hashing them (please tell me you're [not using MD5](http://codahale.com/how-to-safely-store-a-password/)) but even with a properly salted+hashed password table it can be brute forced pretty quickly if the passwords are weak. Mellt is just another piece of the pie in making the attacker's life more difficult.
 
 ##License
 
