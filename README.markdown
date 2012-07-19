@@ -3,15 +3,9 @@
 ##Description
 [Mellt](http://mel.lt/) tests the strength of a password by calculating how long it would take to brute force it. Unlike most password strength checkers that just require one of each lowercase/uppercase/number/special char/at least 6 characters/etc, Mellt approaches the problem the same way a password cracker would, and returns a meaningful number you can use in determining the strength of a password. 
 
-##Credits
+##Try it out
 
-Much of the logic / concept behind Mellt is based on the description of the [TGP Password Strength Checker](http://www.hammerofgod.com/passwordcheck.aspx) by Timothy "Thor" Mullen.
-
-The included common-passwords.txt contains the 10,000 most common passwords from [Mark Burnett's excellent password collection](http://xato.net/passwords/more-top-worst-passwords/).
-
-The PHP and Javascript implementations were developed by [ravisorg](https://github.com/ravisorg).
-
-The Node.js implementation was developed by [SeanJA](https://github.com/SeanJA).
+You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.lt/).
 
 ##Usage
 
@@ -36,6 +30,14 @@ The Node.js implementation was developed by [SeanJA](https://github.com/SeanJA).
 	var mellt = require("./lib/Mellt");
 	var daysToCrack = mellt.CheckPassword('my password');
 
+##Tips for passing Mellt
+
+There are a couple easy things you can do to quickly increase the strength of your passwords in a way that Mellt recognizes.
+
+- Increase the size of the character set you're using. In essence this means don't use just lower case and numbers. Adding uppercase and special characters (even spaces) will suddenly bump up the time to crack dramatically because the attacker now needs to search the extra characters at each position. In other words, adding a single punctuation mark to your password is like giving a power up to every other character in the password.
+
+- Increase the number of characters you're using. The character set won't matter much if your password is less than 8 characters. One easy way to do this (and to satisfy the first requirement as well) is to make your password a short phrase, separating the words with some special character (spaces, dashes, periods, etc). As an added bonus, a short phrase will be easier for you to remember than 12 random characters.
+
 ##Security Q&A
 
 ####Q: Those wacky crackers can see Mellt's code! They'll just use that to simplify their brute force attacks (eg: reversing the character sets)!
@@ -53,6 +55,16 @@ A: No, if it's not on the list of 10,000 most common, it's probably not that com
 ####Q: Why do I need this tool? I'm hashing my passwords / preventing multiple attempts per second / etc...
 
 A: Mellt is assuming the attacker has your database of passwords. Of course you need to be hashing them (please tell me you're [not using MD5](http://codahale.com/how-to-safely-store-a-password/)) but even with a properly salted+hashed password table it can be brute forced pretty quickly if the passwords are weak. Mellt is just another piece of the pie in making the attacker's life more difficult.
+
+##Credits
+
+Much of the logic / concept behind Mellt is based on the description of the [TGP Password Strength Checker](http://www.hammerofgod.com/passwordcheck.aspx) by Timothy "Thor" Mullen.
+
+The included common-passwords.txt contains the 10,000 most common passwords from [Mark Burnett's excellent password collection](http://xato.net/passwords/more-top-worst-passwords/).
+
+The PHP and Javascript implementations were developed by [ravisorg](https://github.com/ravisorg).
+
+The Node.js implementation was developed by [SeanJA](https://github.com/SeanJA).
 
 ##License
 
