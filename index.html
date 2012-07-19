@@ -7,6 +7,57 @@
     <meta name="description" content="Mellt : A brute force password checker that returns a meaningful number describing the real world strength of your password" />
 
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://raw.github.com/ravisorg/Mellt/master/javascript/Mellt.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/ravisorg/Mellt/master/javascript/common-passwords.js"></script>
+    <script>
+    var mellt = new Mellt();
+    function checkPassword(password) {
+      error = null;
+      if (password) {
+        var daysToCrack = mellt.CheckPassword(password);
+        if (daysToCrack<0) {
+          $('#passwordResult').text('The password you entered is one of the world\'s most commonly used passwords. You should not be using this password.').css({'color':'maroon'});
+          return;
+        }
+        else if (daysToCrack<=2) {
+          $('#passwordResult').text('The password you entered is terrible. Mellt estimates '+daysToCrack+' day'+(daysToCrack!=1?'s':'')+' to crack').css({'color':'maroon'});
+        }
+        else if (daysToCrack<=7) {
+          $('#passwordResult').text('The password you entered is pretty bad. Mellt estimates '+daysToCrack+' days to crack').css({'color':'maroon'});
+        }
+        else if (daysToCrack<=30) {
+          $('#passwordResult').text('Getting better, but not great yet. Mellt estimates '+daysToCrack+' days to crack').css({'color':'#AF7817'});
+        }
+        else if (daysToCrack<=365) {
+          $('#passwordResult').text('The password you entered is decent. Mellt estimates '+daysToCrack+' days to crack').css({'color':'green'});
+        }
+        else if (daysToCrack==1000000000) {
+          var years = Math.round(daysToCrack / 365 * 10) / 10;
+          if (years>1000000) {
+            years = (Math.round(years/1000000*10)/10)+' million'
+          }
+          if (years>1000) {
+            years = (Math.round(years/1000))+' thousand'
+          }
+          $('#passwordResult').text('Awesome password, congratulations! Mellt estimates >'+years+' years to crack').css({'color':'green'});
+        }
+        else {
+          var years = Math.round(daysToCrack / 365 * 10) / 10;
+          if (years>1000000) {
+            years = (Math.round(years/1000000*10)/10)+' million'
+          }
+          if (years>1000) {
+            years = (Math.round(years/1000))+' thousand'
+          }
+          $('#passwordResult').text('Awesome password, congratulations! Mellt estimates '+years+' years to crack').css({'color':'green'});
+        }
+      }
+      else {
+        $('#passwordResult').text('Please enter a password to test.').css({'color':''});
+      }
+    }
+    </script>
 
     <title>Mellt</title>
   </head>
@@ -33,17 +84,13 @@
       <section id="main_content" class="inner">
         <h2>Description</h2>
 
-<p><a href="http://mel.lt/">Mellt</a> tests the strength of a password by calculating how long it would take to brute force it. Unlike most password strength checkers that just require one of each lowercase/uppercase/number/special char/at least 6 characters/etc, Mellt approaches the problem the same way a password cracker would, and returns a meaningful number you can use in determining the strength of a password. </p>
+<p><a href="http://mel.lt/">Mellt</a> tests the strength of a password by calculating how long it would take to brute force it. Unlike most password strength checkers that just require one of each lowercase/uppercase/number/special char/at least 6 characters/etc, Mellt approaches the problem the same way a password cracker would, and returns a meaningful number you can use in determining the strength of a password.</p>
 
-<h2>Credits</h2>
+<h2>Try it out</h1>
 
-<p>Much of the logic / concept behind Mellt is based on the description of the <a href="http://www.hammerofgod.com/passwordcheck.aspx">TGP Password Strength Checker</a> by Timothy "Thor" Mullen.</p>
-
-<p>The included common-passwords.txt contains the 10,000 most common passwords from <a href="http://xato.net/passwords/more-top-worst-passwords/">Mark Burnett's excellent password collection</a>.</p>
-
-<p>The PHP and Javascript implementations were developed by <a href="https://github.com/ravisorg">ravisorg</a>.</p>
-
-<p>The Node.js implementation was developed by <a href="https://github.com/SeanJA">SeanJA</a>.</p>
+<p>Enter your password: <input type="text" value="" onKeyUp="checkPassword(this.value);" /><br />
+  <span style="font-weight: bold;" id="passwordResult"></span></p>
+<p>This form uses the Javascript version of Mellt. No data is collected, and nothing leaves your computer. If you're extra paranoid (<a href="http://www.youtube.com/watch?v=YKUOB8MN4Kc">excellent</a>) you can <a href="https://github.com/ravisorg/Mellt/zipball/master">download the code</a>, <a href="https://github.com/ravisorg/Mellt/blob/master/javascript/Mellt.js">examine it</a>, and run it on your own computer.</p>
 
 <h2>Usage</h2>
 
@@ -71,6 +118,15 @@ var daysToCrack = mellt.CheckPassword('my password');
 var daysToCrack = mellt.CheckPassword('my password');
 </code></pre>
 
+<h2>Tips for passing Mellt</h2>
+
+<p>There are a couple easy things you can do to quickly increase the strength of your passwords in a way that Mellt recognizes.</p>
+
+<ul>
+<li><p>Increase the size of the character set you're using. In essence this means don't use just lower case and numbers. Adding uppercase and special characters (even spaces) will suddenly bump up the time to crack dramatically because the attacker now needs to search the extra characters at each position. In other words, adding a single punctuation mark to your password is like giving a power up to every other character in the password.</p></li>
+<li><p>Increase the number of characters you're using. The character set won't matter much if your password is less than 8 characters. One easy way to do this (and to satisfy the first requirement as well) is to make your password a short phrase, separating the words with some special character (spaces, dashes, periods, etc). As an added bonus, a short phrase will be easier for you to remember than 12 random characters.</p></li>
+</ul>
+
 <h2>Security Q&amp;A</h2>
 
 <h4>Q: Those wacky crackers can see Mellt's code! They'll just use that to simplify their brute force attacks (eg: reversing the character sets)!</h4>
@@ -88,6 +144,16 @@ var daysToCrack = mellt.CheckPassword('my password');
 <h4>Q: Why do I need this tool? I'm hashing my passwords / preventing multiple attempts per second / etc...</h4>
 
 <p>A: Mellt is assuming the attacker has your database of passwords. Of course you need to be hashing them (please tell me you're <a href="http://codahale.com/how-to-safely-store-a-password/">not using MD5</a>) but even with a properly salted+hashed password table it can be brute forced pretty quickly if the passwords are weak. Mellt is just another piece of the pie in making the attacker's life more difficult.</p>
+
+<h2>Credits</h2>
+
+<p>Much of the logic / concept behind Mellt is based on the description of the <a href="http://www.hammerofgod.com/passwordcheck.aspx">TGP Password Strength Checker</a> by Timothy "Thor" Mullen.</p>
+
+<p>The included common-passwords.txt contains the 10,000 most common passwords from <a href="http://xato.net/passwords/more-top-worst-passwords/">Mark Burnett's excellent password collection</a>.</p>
+
+<p>The PHP and Javascript implementations were developed by <a href="https://github.com/ravisorg">ravisorg</a>.</p>
+
+<p>The Node.js implementation was developed by <a href="https://github.com/SeanJA">SeanJA</a>.</p>
 
 <h2>License</h2>
 
