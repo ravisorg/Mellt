@@ -30,6 +30,12 @@ You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.l
 	var mellt = require("./lib/Mellt");
 	var daysToCrack = mellt.CheckPassword('my password');
 
+###python
+
+	import mellt
+	m = mellt.Mellt()
+	print m.check_password('my password') + ' days to crack'
+
 ##Tips for passing Mellt
 
 There are a couple easy things you can do to quickly increase the strength of your passwords in a way that Mellt recognizes.
