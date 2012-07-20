@@ -1,7 +1,7 @@
 class Mellt:
 
 	def __init__(self):
-		self.char_sets = {
+		self.character_sets = {
 			1:"0123456789",
 			2:"abcdefghijklmnopqrstuvwxyz",
 			3:"abcdefghijklmnopqrstuvwxyz0123456789",
@@ -14,21 +14,31 @@ class Mellt:
 	def get_char_set (self, password):
 		password = list(password)
 		self.password_char_set = ''
-		base = False
-		base_key = 99
+		# Figure out which character set the password is using (based on the most 
+		# "complex" character in it).
+		base = '';
+		base_key = None;
 		for char in password:
-			found_character = False
+			found_char = False;
+			for character_set_key, character_set in self.character_sets.iteritems():
+				if base_key<=character_set_key and char in character_set:
+					base_key = character_set_key;
+					base = character_set;
+					found_char = True;
+					break;
 			
-			for key,character_set in self.char_sets.iteritems() :
-				if key <= base_key and character_set.find(char) != -1 :
-					found_character = True
-					base = character_set
-					base_key = key
-					break
 			# If the character we were looking for wasn't anywhere in any of the 
 			# character sets, assign the largest (last) character set as default.
-			if found_character == False:
-				base = self.char_sets[len(self.char_sets) - 1]
-				break
+			if found_char == False:
+				base = self.character_sets[7];
+				break;
 		self.password_char_set = base
 		return base
+
+	def check_common(self, password):
+		password = password.lower()
+		for line in open('common-passwords.txt','r'):
+			line = line.rstrip()
+			if password == line:
+				return True
+		return False
