@@ -44,7 +44,7 @@ class Mellt:
 	def brute_force_days(self, password):
 		base = self.get_char_set(password)
 		pass_list = list(password)
-		hashesPerSecond = 1000000000;
+		hashes_per_second = 1000000000;
 		# Starting at the first character, figure out it's position in the character set
 		# and how many attempts will take to get there. For example, say your password
 		# was an integer (a bank card PIN number for example):
@@ -59,10 +59,10 @@ class Mellt:
 		# ignore anything between 6530 and 9999. Using this logic, 'aaa' would be a worse
 		# password than 'zzz', because the attacker would encounter 'aaa' first. 
 		attempts = 0;
-		charactersInBase = len(base);
-		charactersInPassword = len(password);
+		characters_in_base = len(base);
+		characters_in_password = len(password);
 		position = 0;
-		for position in range(0, charactersInPassword):
+		for position in range(0, characters_in_password):
 			# We power up to the reverse position in the string. For example, if we're trying 
 			# to hack the 4 character PING code in the example above:
 			# First number * (number of characters possible in the charset ^ length of password)
@@ -74,14 +74,14 @@ class Mellt:
 			# and add on the last number
 			# 9
 			# Totals: 6000 + 500 + 20 + 9 = 6529 attempts before we encounter the correct password.
-			powerOf = charactersInPassword - position - 1;
+			power_of = characters_in_password - position - 1;
 			# Character position within the base set. We add one on because strpos is base 
 			# 0, we want base 1.
-			charactersAtPosition = base.index(pass_list[position]) + 1;
+			characters_at_position = base.index(pass_list[position]) + 1;
 			# If we're at the last character, simply add it's position in the character set
 			# this would be the "9" in the pin code example above.
-			if (powerOf == 0):
-				attempts = attempts + charactersAtPosition;
+			if power_of == 0:
+				attempts = attempts + characters_at_position;
 			# Otherwise we need to iterate through all the other characters positions to 
 			# get here. For example, to find the 5 in 25 we can't just guess 2 and then 5
 			# (even though Hollywood seems to insist this is possible), we need to try 0,1,
@@ -92,14 +92,14 @@ class Mellt:
 				# character set, X times, where X is our position -1. Then we need to multiply 
 				# that by this character's position.
 				# Multiplier is the (10^4) or (10^3), etc in the pin code example above.
-				multiplier = pow(charactersInBase, powerOf);
+				multiplier = pow(characters_in_base, power_of);
 				# New attempts is the number of attempts we're adding for this position.
-				newAttempts = charactersAtPosition * multiplier;
+				new_attempts = characters_at_position * multiplier;
 				# Add that on to our existing number of attempts.
-				attempts = attempts + newAttempts;
+				attempts = attempts + new_attempts;
 		# We can (worst case) try a billion passwords a second. Calculate how many days it
 		# will take us to get to the password.
-		perDay = hashesPerSecond * 60 * 60 * 24;
+		perDay = hashes_per_second * 60 * 60 * 24;
 		# This allows us to calculate a number of days to crack. We use days because anything
 		# that can be cracked in less than a day is basically useless, so there's no point in
 		# having a smaller granularity (hours for example).
@@ -108,7 +108,7 @@ class Mellt:
 		# If it's going to take more than a billion days to crack, just return a billion. This
 		# helps when code outside this function isn't using bcmath. Besides, if the password 
 		# can survive 2.7 million years it's probably ok for now.
-		if (days > 1000000000):
+		if days > 1000000000:
 			return 1000000000;
 
 		return round(days);
