@@ -1,24 +1,29 @@
 class Mellt:
 
 	def __init__(self):
-		self.char_sets = ["0123456789", "abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"]
+		self.char_sets = {
+			1:"0123456789",
+			2:"abcdefghijklmnopqrstuvwxyz",
+			3:"abcdefghijklmnopqrstuvwxyz0123456789",
+			4:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			5:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+			6:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+",
+			7:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"
+		}
 
 	def get_char_set (self, password):
 		password = list(password)
 		self.password_char_set = ''
 		base = False
-		found_count = 0
+		base_key = 99
 		for char in password:
 			found_character = False
 			
-			for character_set in self.char_sets :
-				if base != character_set and character_set.find(char) != -1 :
+			for key,character_set in self.char_sets.iteritems() :
+				if key <= base_key and character_set.find(char) != -1 :
 					found_character = True
 					base = character_set
-					found_count += 1
-					if found_count == len(password):
-						self.password_char_set = base
-						return base
+					base_key = key
 					break
 			# If the character we were looking for wasn't anywhere in any of the 
 			# character sets, assign the largest (last) character set as default.
