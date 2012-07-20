@@ -34,7 +34,7 @@ You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.l
 
 	import mellt
 	m = mellt.Mellt()
-	print m.check_password('my password') + ' days to crack'
+	print str(m.check_password('my password')) + ' days to crack'
 
 ##Tips for passing Mellt
 
