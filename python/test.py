@@ -5,42 +5,42 @@ class TestMellt(unittest.TestCase):
 
 	def test_char_set_single_number(self):
 		m = mellt.Mellt()
-		password = '1';
+		password = '1'
 		self.assertEqual('0123456789', m.get_char_set(password))
 
 	def test_char_set_single_letter(self):
 		m = mellt.Mellt()
-		password = 'a';
+		password = 'a'
 		self.assertEqual('abcdefghijklmnopqrstuvwxyz', m.get_char_set(password))
 
 	def test_char_set_single_funny_character(self):
 		m = mellt.Mellt()
-		password = '$';
+		password = '$'
 		self.assertEqual("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", m.get_char_set(password))
 
 	def test_char_set_single_extra_funny_character(self):
 		m = mellt.Mellt()
-		password = '[';
+		password = '['
 		self.assertEqual("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~", m.get_char_set(password))
 
 	def test_char_set_multiple_numbers(self):
 		m = mellt.Mellt()
-		password = '1234567890';
+		password = '1234567890'
 		self.assertEqual('0123456789', m.get_char_set(password))
 
 	def test_char_set_alphanum_numbers(self):
 		m = mellt.Mellt()
-		password = 'abc123';
+		password = 'abc123'
 		self.assertEqual('abcdefghijklmnopqrstuvwxyz0123456789', m.get_char_set(password))
 
 	def test_char_set_multiple_funny_characters(self):
 		m = mellt.Mellt()
-		password = 'asdva98dfv79au******&^*&^&^$##%$#@*&';
+		password = 'asdva98dfv79au******&^*&^&^$##%$#@*&'
 		self.assertEqual("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", m.get_char_set(password))
 
 	def test_char_set_multiple_extra_funny_characters(self):
 		m = mellt.Mellt()
-		password = 'abc123[][][\][ap[sdfp][pasd]f[a9sdf7989*&^*&^%&';
+		password = 'abc123[][][\][ap[sdfp][pasd]f[a9sdf7989*&^*&^%&'
 		self.assertEqual("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~", m.get_char_set(password))
 
 	def test_first_common(self):
