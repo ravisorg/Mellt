@@ -53,7 +53,7 @@ class TestMellt(unittest.TestCase):
 		password = 'eyphed'
 		self.assertTrue(m.check_common(password))
 
-	def test_last_common(self):
+	def test_not_common(self):
 		m = mellt.Mellt()
 		password = 'pass123$'
 		self.assertFalse(m.check_common(password))
@@ -79,6 +79,11 @@ class TestMellt(unittest.TestCase):
 		m = mellt.Mellt()
 		password = 'pass123$'
 		self.assertEquals(2, m.check_password(password))
+
+	def test_long_crack_password(self):
+		m = mellt.Mellt()
+		password = 'correcthorsebatterystaple' # https://xkcd.com/936/
+		self.assertEquals(1000000000, m.check_password(password))
 
 if __name__ == '__main__':
     unittest.main()
