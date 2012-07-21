@@ -11,7 +11,7 @@ class Mellt:
 			7:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"
 		}
 
-	def get_char_set (self, password):
+	def __get_char_set (self, password):
 		password = list(password)
 		# Figure out which character set the password is using (based on the most 
 		# "complex" character in it).
@@ -33,7 +33,7 @@ class Mellt:
 				break
 		return base
 
-	def check_common(self, password):
+	def __check_common(self, password):
 		password = password.lower()
 		for line in open('common-passwords.txt','r'):
 			line = line.rstrip()
@@ -41,8 +41,8 @@ class Mellt:
 				return True
 		return False
 
-	def brute_force_days(self, password):
-		base = self.get_char_set(password)
+	def __brute_force_days(self, password):
+		base = self.__get_char_set(password)
 		pass_list = list(password)
 		hashes_per_second = 1000000000
 		# Starting at the first character, figure out it's position in the character set
@@ -114,6 +114,6 @@ class Mellt:
 		return round(days)
 
 	def check_password(self, password):
-		if self.check_common(password):
+		if self.__check_common(password):
 			return -1
-		return self.brute_force_days(password)
+		return self.__brute_force_days(password)
