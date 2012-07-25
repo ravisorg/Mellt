@@ -74,7 +74,6 @@ class Mellt
         attempts = 0
         characters_in_base = base.length()
         characters_in_password = password.length() - 1
-        position = 0
         (0..characters_in_password).each { |position|
             # We power up to the reverse position in the string. For example, if we're trying
             # to hack the 4 character PING code in the example above:
@@ -90,7 +89,8 @@ class Mellt
             power_of = characters_in_password - position
             # Character position within the base set. We add one on because strpos is base
             # 0, we want base 1.
-            characters_at_position = base.index(password[position]) + 1
+            index = base.index(password[position]).to_i
+            characters_at_position = index + 1
             # If we're at the last character, simply add it's position in the character set
             # this would be the "9" in the pin code example above.
             if power_of == 0
