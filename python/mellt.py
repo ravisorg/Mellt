@@ -12,6 +12,7 @@ class Mellt:
         }
 
     def __get_char_set(self, password):
+        #blank passwords are cracked instantly
         password = list(password)
         # Figure out which character set the password is using (based on the most
         # "complex" character in it).
@@ -98,11 +99,11 @@ class Mellt:
                 attempts = attempts + new_attempts
         # We can (worst case) try a billion passwords a second. Calculate how many days it
         # will take us to get to the password.
-        perDay = hashes_per_second * 60 * 60 * 24
+        per_day = hashes_per_second * 60 * 60 * 24
         # This allows us to calculate a number of days to crack. We use days because anything
         # that can be cracked in less than a day is basically useless, so there's no point in
         # having a smaller granularity (hours for example).
-        days = attempts / perDay
+        days = attempts / per_day
 
         # If it's going to take more than a billion days to crack, just return a billion. This
         # helps when code outside this function isn't using bcmath. Besides, if the password
@@ -113,6 +114,8 @@ class Mellt:
         return round(days)
 
     def check_password(self, password):
+        if password is '':
+            return -1
         if self.__check_common(password):
             return -1
         return self.__brute_force_days(password)
