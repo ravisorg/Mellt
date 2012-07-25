@@ -78,7 +78,7 @@ The included common-passwords.txt contains the 10,000 most common passwords from
 
 The PHP and Javascript implementations were developed by [ravisorg](https://github.com/ravisorg).
 
-The Node.js and python implementations were developed by [SeanJA](https://github.com/SeanJA).
+The Node.js, python and ruby implementations were developed by [SeanJA](https://github.com/SeanJA).
 
 ##License
 
