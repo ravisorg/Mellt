@@ -61,7 +61,7 @@ class TestMellt(unittest.TestCase):
 
     def test_short_brute_force_common(self):
         m = mellt.Mellt()
-        password = 'pass123$'
+        password = 'pass123'
         #value taken from the php version
         self.assertEquals(2, m._Mellt__brute_force_days(password))
 
@@ -71,7 +71,12 @@ class TestMellt(unittest.TestCase):
         #value taken from the php version
         self.assertEquals(1000000000, m._Mellt__brute_force_days(password))
 
-    def test__Mellt__check_common_password(self):
+    def test_check_empty_password(self):
+        m = mellt.Mellt()
+        password = ''
+        self.assertEquals(-1, m.check_password(password))
+
+    def test_check_common_password(self):
         m = mellt.Mellt()
         password = 'password'
         self.assertEquals(-1, m.check_password(password))
