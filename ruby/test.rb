@@ -4,13 +4,13 @@ require './Mellt.rb'
 #make the methods public for testing
 class MelltPublic < Mellt
   def get_char_set(password)
-  super(password)
+    super(password)
   end
   def check_common(password)
-  super(password)
+    super(password)
   end
   def brute_force_days(password)
-  super(password)
+    super(password)
   end
 end
 
