@@ -37,6 +37,13 @@ You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.l
 	days_to_crack = m.check_password('my password')
 	print str(days_to_crack) + ' days to crack'
 
+###ruby
+
+	require './Mellt.rb'
+	m = Mellt.new()
+	days_to_crack = m.check_password('my password')
+	puts days_to_crack.to_s + " days to crack"
+
 ##Tips for passing Mellt
 
 There are a couple easy things you can do to quickly increase the strength of your passwords in a way that Mellt recognizes.
