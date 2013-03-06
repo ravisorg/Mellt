@@ -1,4 +1,14 @@
 var fs = require("fs");
+
+var data = fs.readFileSync(__dirname + '/common-passwords.txt', 'UTF-8').toString();
+var commonPasswords = {};
+var words = data.split("\r\n");
+var i, word, len;
+for (i = 0, len = words.length; i < len; i++) {
+	word = words[i];
+	commonPasswords[word] = true;
+}
+
 /**
  * Check a password
  */
@@ -17,9 +27,7 @@ exports.CheckPassword = function(password) {
  */
 
 function CheckCommon(password) {
-	var found = false;
-	var data = fs.readFileSync(__dirname + '/common-passwords.txt', 'UTF-8').toString();
-	return data.split("\r\n").indexOf(password) !== -1;
+	return commonPasswords[password] === true;
 }
 
 /**
