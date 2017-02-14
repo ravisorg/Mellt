@@ -1,5 +1,4 @@
 var fs = require("fs");
-
 var data = fs.readFileSync(__dirname + '/common-passwords.txt', 'UTF-8').toString();
 var commonPasswords = {};
 var words = data.split("\n");
@@ -11,33 +10,37 @@ for (i = 0, len = words.length; i < len; i++) {
 
 /**
  * Check a password
+ * @param password the password to check
+ * @returns {number}
+ * @constructor
  */
-
 exports.CheckPassword = function(password) {
 	//make sure it is lower case, this function can be called by itself
-	password = password.toLowerCase();
-	var common = CheckCommon(password)
+	var common = CheckCommon(password.toLowerCase());
 	return common === true ? -1 : BruteForce(password);
-}
+};
 
 /**
  * First check passwords in the common password file if available.
  * We do this because "password" takes 129 seconds, but is the first
  * thing an attacker will try.
+ * @param password
+ * @returns {boolean}
+ * @constructor
  */
-
 function CheckCommon(password) {
 	return commonPasswords[password] === true;
 }
 
 /**
  * Figure out how long it will take to brute force a password
+ * @param password
+ * @returns {number}
+ * @constructor
  */
-
 function BruteForce(password) {
 	//make sure it is lower case, this function can be called by itself
-	password = password.toLowerCase();
-	base = GetCharset(password);
+	var base = GetCharset(password);
 	var hashesPerSecond = 1000000000;
 	// Starting at the first character, figure out it's position in the character set
 	// and how many attempts will take to get there. For example, say your password
@@ -117,10 +120,20 @@ function BruteForce(password) {
 
 /**
  * Figure out which character set the password is using (based on the most  "complex" character in it).
+ * @param password
+ * @returns {boolean}
+ * @constructor
  */
-
 function GetCharset(password) {
-	var characterSets = ["0123456789", "abcdefghijklmnopqrstuvwxyz", "abcdefghijklmnopqrstuvwxyz0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+", "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"]
+	var characterSets = [
+	    "0123456789",
+        "abcdefghijklmnopqrstuvwxyz",
+        "abcdefghijklmnopqrstuvwxyz0123456789",
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+",
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-=_+[]\"{}|;':,./<>?`~"
+    ];
 	// Figure out which character set the password is using (based on the most 
 	// "complex" character in it).
 	var base = false;
