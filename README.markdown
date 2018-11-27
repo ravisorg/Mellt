@@ -1,21 +1,21 @@
-#Mellt
+# Mellt
 
-##Description
+## Description
 [Mellt](http://mel.lt/) tests the strength of a password by calculating how long it would take to brute force it. Unlike most password strength checkers that just require one of each lowercase/uppercase/number/special char/at least 6 characters/etc, Mellt approaches the problem the same way a password cracker would, and returns a meaningful number you can use in determining the strength of a password. 
 
-##Try it out
+## Try it out
 
 You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.lt/).
 
-##Usage
+## Usage
 
-###PHP
+### PHP
 
 	include('Mellt.class.php');
 	$mellt = new Mellt();
 	$daysToCrack = $mellt->CheckPassword('my password');
 	
-###Javascript
+### Javascript
 	
 	<script src="Mellt.js"></script>
 	<!-- Make sure common-passwords.js is included AFTER Mellt.js -->
@@ -25,26 +25,26 @@ You can try the Javascript version of Mellt on the [Mellt homepage](http://mel.l
 	var daysToCrack = mellt.CheckPassword('my password');
 	</script>
 
-###nodejs
+### nodejs
 
 	var mellt = require("./lib/Mellt");
 	var daysToCrack = mellt.CheckPassword('my password');
 
-###python
+### python
 
 	import mellt
 	m = mellt.Mellt()
 	days_to_crack = m.check_password('my password')
 	print str(days_to_crack) + ' days to crack'
 
-###ruby
+### ruby
 
 	require './Mellt.rb'
 	m = Mellt.new()
 	days_to_crack = m.check_password('my password')
 	puts days_to_crack.to_s + " days to crack"
 
-##Tips for passing Mellt
+## Tips for passing Mellt
 
 There are a couple easy things you can do to quickly increase the strength of your passwords in a way that Mellt recognizes.
 
@@ -52,25 +52,25 @@ There are a couple easy things you can do to quickly increase the strength of yo
 
 - Increase the number of characters you're using. The character set won't matter much if your password is less than 8 characters. One easy way to do this (and to satisfy the first requirement as well) is to make your password a short phrase, separating the words with some special character (spaces, dashes, periods, etc). As an added bonus, a short phrase will be easier for you to remember than 12 random characters.
 
-##Security Q&A
+## Security Q&A
 
-####Q: Those wacky crackers can see Mellt's code! They'll just use that to simplify their brute force attacks (eg: reversing the character sets)!
+#### Q: Those wacky crackers can see Mellt's code! They'll just use that to simplify their brute force attacks (eg: reversing the character sets)!
 
 A: The benefit to the attacker of seeing the source to Mellt is negligible. No user is going to think to them self "I can save one character if I use z's instead of a's". Their favorite password will be banned because it's too weak and they'll pick something stronger (vs just adding a $ to the end) - that's the purpose of these scripts.
 
-####Q: You include the top 10,000 common passwords, won't people (and crackers) just use the 10,001st most common?
+#### Q: You include the top 10,000 common passwords, won't people (and crackers) just use the 10,001st most common?
 
 A: No, people don't work that way - they don't move down the list trying each one in turn. The purpose of banning the most common passwords is to prevent people from being lazy and using "password". Once you prevent that, you force them to be a little more creative and come up with something better.
 
-####Q: "[pass123$](http://pastebin.com/b79cJV5f)" isn't on the common list, but it's a terrible password! You should ban it!
+#### Q: "[pass123$](http://pastebin.com/b79cJV5f)" isn't on the common list, but it's a terrible password! You should ban it!
 
 A: No, if it's not on the list of 10,000 most common, it's probably not that common. And the attacker doesn't know that it's a bad password when s/he starts trying to break it, so they need to try all the combinations to get there. "pass123$" is not a good password, but it's not "[12345](http://www.youtube.com/watch?v=K95SXe3pZoY)" bad. It's up to you as the developer implementing Mellt to decide the level of security you want to enforce. "pass123$" takes about 2 days via brute force, so set your limit to be higher than that if you don't want it allowed.
 
-####Q: Why do I need this tool? I'm hashing my passwords / preventing multiple attempts per second / etc...
+#### Q: Why do I need this tool? I'm hashing my passwords / preventing multiple attempts per second / etc...
 
 A: Mellt is assuming the attacker has your database of passwords. Of course you need to be hashing them (please tell me you're [not using MD5](http://codahale.com/how-to-safely-store-a-password/)) but even with a properly salted+hashed password table it can be brute forced pretty quickly if the passwords are weak. Mellt is just another piece of the pie in making the attacker's life more difficult.
 
-##Credits
+## Credits
 
 Much of the logic / concept behind Mellt is based on the description of the [TGP Password Strength Checker](http://www.hammerofgod.com/passwordcheck.aspx) by Timothy "Thor" Mullen.
 
@@ -80,7 +80,7 @@ The PHP and Javascript implementations were developed by [ravisorg](https://gith
 
 The Node.js, python and ruby implementations were developed by [SeanJA](https://github.com/SeanJA).
 
-##License
+## License
 
 Mellt is licensed under the Modified BSD License (aka the 3 Clause BSD). Basically you can use it for any purpose, including commercial, so long as you leave the copyright notice intact and don't use my name or the names of any other contributors to promote products derived from Mellt.
 
